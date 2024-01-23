@@ -1,4 +1,4 @@
-/*Final project code template
+/*Epsilon Final project code 
   A template for the final project code that uses multiple files
   for modularity. The compiler first loads the principal file 
   (the one with the same name as the folder) and then loads 
@@ -12,8 +12,8 @@
   RemoteControl.ino
 
   written for the MSP432401 board
-  Author: Deborah Walter
-  Last revised: 11/28/2023
+  Author: Walter Deborah, Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
+  Last revised: 1/23/2024
 
 ***** Hardware Connections: *****
      start button       P3.0

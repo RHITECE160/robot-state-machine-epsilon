@@ -15,7 +15,7 @@
   the motors stop. Then the next few states are place-holders. The Robot returns
   to IDLE state when autonomous functions are complete.
 
-  Created by: Your Name
+  Created by: Jennings Brooklyn, Rohan Malipeddi, Luis 
   Date: Current Date
   Version: 1.0
 */

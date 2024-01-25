@@ -23,7 +23,8 @@
 This function uses a playstation controller and the PLSK libraray with
 an RLSK robot using to implement remote controller.
 */
-void RemoteControl() {
+
+void RemoteControl(PS2X Controller, Servo myServo) {
     //checks if the joystick is moved
     if (Controller.Analog(PSS_LY) != 128) {
       //assigning a value for y position of the joystick
@@ -63,18 +64,13 @@ void RemoteControl() {
       Serial.println("R2 button pushed ");
       spin();
     }
-    //force stop mapping
-    else if (Controller.Button(PSB_CROSS)) {
-      Serial.println("CROSS button pushed");
-      stop();
-    } 
     //claw open map
-    else if(Controller.Button(PSB_CIRCLE)) {
+    else if(Controller.Button(PSB_R1)) {
       Serial.println("Circle button pressed");
       Openclaw(myServo);
     } 
     //claw close map
-    else if(Controller.Button(PSB_SQUARE)) {
+    else if(Controller.Button(PSB_L1)) {
       Serial.println("Square button pressed");
       Closeclaw(myServo);
     }

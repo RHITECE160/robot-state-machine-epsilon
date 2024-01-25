@@ -39,7 +39,7 @@ Serial.println("in the AutonomousControl function");
       case AUTO_ACTION1:
         Serial.println("in Autonomous mode the current state: AUTO_ACTION1");
         //move forward for a time, then stop, and transition to the next state
-        forward();  
+        forward(30);  
         // Check if the movement duration has passed
         if (millis() - lastActionTime >= movementDuration) {
           stop(); //stop the forward movement

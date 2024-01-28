@@ -113,12 +113,23 @@ void setup() {
 void loop() {
   // Read input from PlayStation controller
   ps2x.read_gamepad();
+float distance = 3;
+
+  if(ps2x.ButtonPressed(PSB_R1)){
+    autonomousSpinRight(10);
+    automomousForward(10,10);
+  }
+  else if(ps2x.ButtonPressed(PSB_L1)){
+    autonomousSpinLeft(10);
+    autonomousForward(10,10);
+  }
+
 
   // Update state machine based on button input
-  updateStateMachine();
+  //updateStateMachine();
 
   // Perform actions based on the current state
-  executeStateActions();
+  //executeStateActions();
 }
 
 /* updateStateMachine function

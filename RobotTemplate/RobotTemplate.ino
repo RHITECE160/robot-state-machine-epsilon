@@ -39,6 +39,7 @@
 
 // Create an instance of the playstation controller object
 PS2X ps2x;
+Servo myServo;
 
 // Define high-level state machine
 enum RobotState {
@@ -69,7 +70,8 @@ const uint16_t lowSpeed = 15;
 const uint16_t fastSpeed = 30;
 const unsigned long movementDuration = 2000;  // Duration for movement forward autonomously in milliseconds
 
-Servo myServo;
+const int servoPin = 38;
+
 
 void setup() {
   Serial.begin(57600);
@@ -77,6 +79,7 @@ void setup() {
 
   // Run setup code
   setupRSLK();
+  myServo.attach(servoPin);
 
   // Initialize PlayStation controller
   delayMicroseconds(500 * 1000);  //added delay to give wireless ps2 module some time to startup, before configuring it
@@ -192,7 +195,7 @@ void executeStateActions() {
     case MANUAL:
       // Perform actions for the manual state
       Serial.println("Manual Mode");
-      RemoteControl();
+      RemoteControl(ps2x, myServo);
       // Add any additional actions for the manual state
       break;
   }

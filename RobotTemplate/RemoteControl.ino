@@ -23,63 +23,59 @@
 This function uses a playstation controller and the PLSK libraray with
 an RLSK robot using to implement remote controller.
 */
-void RemoteControl() {
+
+void RemoteControl(PS2X Controller, Servo myServo) {
     //checks if the joystick is moved
-    if (ps2x.Analog(PSS_LY) != 128) {
+    if (Controller.Analog(PSS_LY) != 128) {
       //assigning a value for y position of the joystick
-      int yVal = ps2x.Analog(PSS_LY);
+      int yVal = Controller.Analog(PSS_LY);
       //the joystick becomes less as I move it forward, so condition is opposite
       if(yVal < 128) {  
         //mapped to specific speeds
-        int speedSetting = map((255-ps2x.Analog(PSS_LY)), 128, 255, 0, 50);
+        int speedSetting = map((255-Controller.Analog(PSS_LY)), 128, 255, 0, 50);
         forward(speedSetting);
       }
       else {
         //mapped to specific speeds
-        int speedSetting = map((ps2x.Analog(PSS_LY)-128), 0, 128, 0, 50);
+        int speedSetting = map((Controller.Analog(PSS_LY)-128), 0, 128, 0, 50);
         back(speedSetting);
       }
 
     } 
     //joystick moved?
-    else if(ps2x.Analog(PSS_LX) != 128) {
+    else if(Controller.Analog(PSS_LX) != 128) {
       //assigning a value for x position of the joystick
-      int xVal = ps2x.Analog(PSS_LX);
+      int xVal = Controller.Analog(PSS_LX);
       //horizontal motoin moves like normal
       if(xVal > 128) {
         //mapped to specific speeds
-        int speedSetting = map(ps2x.Analog(PSS_LX), 128, 255, 0, 35);
+        int speedSetting = map(Controller.Analog(PSS_LX), 128, 255, 0, 35);
         TurnRight(speedSetting);
       }
       else {
         //mapped to specific speeds
-        int speedSetting = map((ps2x.Analog(PSS_LX)-128), 0, 128, 0, 35);
+        int speedSetting = map((Controller.Analog(PSS_LX)-128), 0, 128, 0, 35);
         TurnLeft(speedSetting);
       }
     }
 
     //spin mapping
-    else if(ps2x.Button(PSB_R2)) {
+    else if(Controller.Button(PSB_R2)) {
       Serial.println("R2 button pushed ");
       spin();
     }
-    //force stop mapping
-    else if (ps2x.Button(PSB_CROSS)) {
-      Serial.println("CROSS button pushed");
-      stop();
-    } 
     //claw open map
-    else if(ps2x.Button(PSB_CIRCLE)) {
+    else if(Controller.Button(PSB_R1)) {
       Serial.println("Circle button pressed");
       Openclaw(myServo);
     } 
     //claw close map
-    else if(ps2x.Button(PSB_SQUARE)) {
+    else if(.Button(PSB_L1)) {
       Serial.println("Square button pressed");
       Closeclaw(myServo);
     }
     //spin other way map
-    else if(ps2x.Button(PSB_L2)) {
+    else if(Controller.Button(PSB_L2)) {
       Serial.println("R2 button pushed ");
       spinOtherWay();
     }

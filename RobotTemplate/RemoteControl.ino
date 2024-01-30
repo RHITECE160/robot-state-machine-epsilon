@@ -70,7 +70,7 @@ void RemoteControl(PS2X Controller, Servo myServo) {
       Openclaw(myServo);
     } 
     //claw close map
-    else if(.Button(PSB_L1)) {
+    else if(Controller.Button(PSB_L1)) {
       Serial.println("Square button pressed");
       Closeclaw(myServo);
     }

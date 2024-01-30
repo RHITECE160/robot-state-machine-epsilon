@@ -25,7 +25,7 @@
   2. void stop()
      - Stops both motors.
   
-  Created by: Rohan Malipeddi
+  Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
   Date: 1/22/24
   Version: 1.0
 */
@@ -74,8 +74,8 @@ void spin() {
   enableMotor(BOTH_MOTORS);
   setMotorDirection(LEFT_MOTOR, MOTOR_DIR_BACKWARD);
   setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_FORWARD);
-  setMotorSpeed(LEFT_MOTOR, 30);
-  setMotorSpeed(RIGHT_MOTOR, 30);
+  setMotorSpeed(LEFT_MOTOR, 20);
+  setMotorSpeed(RIGHT_MOTOR, 20);
 }
 
 //Actives right motor to go back and left to go front at fastspeed or 30
@@ -83,8 +83,8 @@ void spinOtherWay() {
   enableMotor(BOTH_MOTORS);
   setMotorDirection(LEFT_MOTOR, MOTOR_DIR_FORWARD);
   setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_BACKWARD);
-  setMotorSpeed(LEFT_MOTOR, 50);
-  setMotorSpeed(RIGHT_MOTOR, 50);
+  setMotorSpeed(LEFT_MOTOR, 20);
+  setMotorSpeed(RIGHT_MOTOR, 20);
 }
 
 //Sets servo motor to 0 degrees

@@ -13,9 +13,10 @@
   Cross to force stop
   Circle to open claw
   Square to close claw
+  Triangle to send IR Signal 
 
-  Created by: Rohan Malipeddi
-  Date: 1/23/24
+  Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
+  Date: 1/29/24
   Version: 1.0
 */
 
@@ -32,12 +33,12 @@ void RemoteControl(PS2X Controller, Servo myServo) {
       //the joystick becomes less as I move it forward, so condition is opposite
       if(yVal < 128) {  
         //mapped to specific speeds
-        int speedSetting = map((255-Controller.Analog(PSS_LY)), 128, 255, 0, 50);
+        int speedSetting = map((255-Controller.Analog(PSS_LY)), 128, 255, 0, 20);
         forward(speedSetting);
       }
       else {
         //mapped to specific speeds
-        int speedSetting = map((Controller.Analog(PSS_LY)-128), 0, 128, 0, 50);
+        int speedSetting = map((Controller.Analog(PSS_LY)-128), 0, 128, 0, 20);
         back(speedSetting);
       }
 
@@ -49,12 +50,12 @@ void RemoteControl(PS2X Controller, Servo myServo) {
       //horizontal motoin moves like normal
       if(xVal > 128) {
         //mapped to specific speeds
-        int speedSetting = map(Controller.Analog(PSS_LX), 128, 255, 0, 35);
+        int speedSetting = map(Controller.Analog(PSS_LX), 128, 255, 0, 10);
         TurnRight(speedSetting);
       }
       else {
         //mapped to specific speeds
-        int speedSetting = map((Controller.Analog(PSS_LX)-128), 0, 128, 0, 35);
+        int speedSetting = map((Controller.Analog(PSS_LX)-128), 0, 128, 0, 10);
         TurnLeft(speedSetting);
       }
     }
@@ -79,6 +80,7 @@ void RemoteControl(PS2X Controller, Servo myServo) {
       Serial.println("R2 button pushed ");
       spinOtherWay();
     }
+    // press to light up the black candle
     else if(Controller.Button(PSB_CROSS)){
       digitalWrite(IR_LED,HIGH);
       delay(1000);

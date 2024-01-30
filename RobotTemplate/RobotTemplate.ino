@@ -127,10 +127,10 @@ void loop() {
   ps2x.read_gamepad();
 
   // Update state machine based on button input
-  //updateStateMachine();
+  updateStateMachine();
 
   // Perform actions based on the current state
-  //executeStateActions();
+  executeStateActions();
 }
 
 /* updateStateMachine function

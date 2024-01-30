@@ -79,7 +79,7 @@ void RemoteControl(PS2X Controller, Servo myServo) {
       Serial.println("R2 button pushed ");
       spinOtherWay();
     }
-    else if(Controller.Button(PSB_TRIANGLE)){
+    else if(Controller.Button(PSB_CROSS)){
       digitalWrite(IR_LED,HIGH);
       delay(1000);
       digitalWrite(IR_LED,LOW);

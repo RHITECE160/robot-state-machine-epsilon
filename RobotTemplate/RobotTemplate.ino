@@ -60,6 +60,7 @@ enum AutoState {
   AUTO_ACTION2,
   AUTO_ACTION3,
   AUTO_ACTION4,
+  AUTO_ACTION5,
   IDLE
 };
 
@@ -174,22 +175,22 @@ void updateStateMachine() {
       Serial.print("in autonomous state........");
       if (ps2x.Button(PSB_SQUARE)) {
         // go to manual state when square button pushed
-        Serial.print("square pressed going to line following.......");
-        RobotCurrentState = LINEFOLLOWING;
-      }
-      break;
-
-    case LINEFOLLOWING:
-      Serial.print("in line following state........");
-      if(ps2x.Button(PSB_TRIANGLE)) {
-        //go to Line following mode when triangle pressed
-        Serial.print("traingle pressed going to manual.......");
+        Serial.print("square pressed going to manual.......");
         RobotCurrentState = MANUAL;
-        // reset autonomous state to start state for the next time
-        AutoCurrentState = START;
       }
-
       break;
+
+    // case LINEFOLLOWING:
+    //   Serial.print("in line following state........");
+    //   if(ps2x.Button(PSB_TRIANGLE)) {
+    //     //go to Line following mode when triangle pressed
+    //     Serial.print("traingle pressed going to manual.......");
+    //     RobotCurrentState = MANUAL;
+    //     // reset autonomous state to start state for the next time
+    //     AutoCurrentState = START;
+    //   }
+
+    //   break;
   }
 }
 
@@ -211,7 +212,7 @@ void executeStateActions() {
     case AUTONOMOUS:
       // Perform actions for the autonomous state
       Serial.println("Autonomous Mode");
-      AutonomousControl();
+      AutonomousControl(myServo);
       // Add any additional actions for the autonomous state
       break;
 
@@ -222,10 +223,10 @@ void executeStateActions() {
       // Add any additional actions for the manual state
       break;
 
-    case LINEFOLLOWING:
-      //Performs line following based on controller input
-      Serial.print("Line Following mode");
-      followLine(ps2x, myServo);
-      break;
+    // case LINEFOLLOWING:
+    //   //Performs line following based on controller input
+    //   Serial.print("Line Following mode");
+    //   followLine(ps2x, myServo);
+    //   break;
   }
 }

@@ -115,11 +115,12 @@ void followLine(PS2X ps2, Servo myServo)
           setMotorSpeed(LEFT_MOTOR, normalSpeed);
           setMotorSpeed(RIGHT_MOTOR, normalSpeed);
       }
+      ps2.read_gamepad();
       if(ps2.Button(PSB_PAD_UP)) {
         follow = false;
       }
-      Openclaw(myServo);
     }
+    Openclaw(myServo);
     Serial.print("Line Following stopped");
 }
 

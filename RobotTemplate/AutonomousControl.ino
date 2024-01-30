@@ -61,7 +61,7 @@ void AutonomousControl(Servo mySero)
       // Add state instructions here
       delay(200);                     // Placeholder delay
       followLine(mySero);
-      AutoCurrentState = AUTO_ACTION4; // Transition to next state
+      AutoCurrentState = AUTO_ACTION5; // Transition to next state
       break;
     
     case AUTO_ACTION5:

@@ -1,30 +1,21 @@
 /*
   AutonomousControl.ino - Arduino Sketch for Autonomous Control of the RLSK robot
 
-  Description:
-  This sketch provides functions for autonomous action of an RLSK robot. A state
-  machine is used for autonomous control. A few actions have been programed as
-  an example.
-
-  The robot moves forward for a time (defined by movementDuration). Then
-  transitions to a number of other states. After reaching the final state,
-  the higher-level state is switched to IDLE to await the next instruction.
-
   State Machine description:
   The robot moves forward for a short time using a non-blocking delay, then
-  the motors stop. Then the next few states are place-holders. The Robot returns
-  to IDLE state when autonomous functions are complete.
+  the motors stop. Then the robot moves forward using the motor encoders
 
   Created by: Jennings Brooklyn, Rohan Malipeddi, Luis
   Date: Current Date
   Version: 1.0
 */
+
 int wheelDiameterInches = 2.7559055;
 int encoderResolution = 360;
 
+//autonomous control iterates through the different movement functions to turn the corner and proceed to the end of the lane
 void AutonomousControl()
 {
-  // put your code here to run in Autonomous control mode
 
   unsigned long myTime;
 
@@ -69,16 +60,11 @@ void AutonomousControl()
     case AUTO_ACTION4:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION4");
       //follow line until the specific point and then deposit the marigold
-
-
-
-
       delay(1000);             // Placeholder delay
       AutoCurrentState = IDLE; // Transition to next state
       break;
 
     default:
-      // Handle unknown state, if needed
       break;
     }
   }
@@ -88,12 +74,14 @@ void AutonomousControl()
   // Add IDLE state instructions here
 }
 
+//function to keep track of the current count of the distance traveled by a point on the tip of the wheels
 float distanceTraveled(uint8_t current_cnt)
 {
   float temp = (wheelDiameterInches * PI * current_cnt) / encoderResolution;
   return temp;
 }
 
+//determines the encoder count that corresponds to an input distance
 int countForDistance(uint32_t distance)
 {
   float temp = (wheelDiameterInches * PI) / encoderResolution;
@@ -101,6 +89,7 @@ int countForDistance(uint32_t distance)
   return int(temp);
 }
 
+//drives forward using the encoders until a target distance is achieved
 void autonomousForward(float inchesToTravel, int speed)
 {
 
@@ -121,7 +110,7 @@ void autonomousForward(float inchesToTravel, int speed)
   /* Set motor speed */
   setMotorSpeed(BOTH_MOTORS, speed);
 
-  /* Drive motor until it has received x pulses */
+  /* Drive motor until it has received x encoder pulses */
   while (totalCount < target)
   {
     leftCount = getEncoderLeftCnt();
@@ -132,6 +121,7 @@ void autonomousForward(float inchesToTravel, int speed)
 
 }
 
+//use encoder to spin exactly  09 degrees left
 void autonomousSpinLeft(int speed){
 
   int totalCount = 0;
@@ -162,6 +152,7 @@ void autonomousSpinLeft(int speed){
   setMotorSpeed(BOTH_MOTORS, 0);
 }
 
+//use encoder to spin exactly  09 degrees right
 void autonomousSpinRight(int speed){
 
   int totalCount = 0;

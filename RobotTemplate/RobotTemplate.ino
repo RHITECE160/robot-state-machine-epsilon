@@ -36,7 +36,7 @@
 #define PS2_SEL 34  //P2.3 <-> yellow wire (also called attention)
 #define PS2_CLK 35  //P6.7 <-> blue wire
 #define START_BUTTON 18  //P3.0 a push button on top of the breadboard
-
+#define IR_LED 19 //P.2.5 yellow wire to IR LED
 
 // Create an instance of the playstation controller object
 PS2X ps2x;

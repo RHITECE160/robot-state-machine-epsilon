@@ -17,7 +17,9 @@
   Square to go back form auto to manual
   Triangle - free
   PAD UP - free
-  PAD DOWN
+  PAD DOWN - free
+  PAD LEFT - free
+  PAD RIGHT - free
 
   Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
   Date: 1/29/24

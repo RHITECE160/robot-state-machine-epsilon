@@ -10,11 +10,9 @@
   Left joystick to move forward, back, right and left
   R2 to spin
   L2 to spinOtherWay
-<<<<<<< Updated upstream
   Cross to force stop
   Circle to open claw
   Square to close claw
-=======
   R1 to open claw
   L1 to close claw
   Cross to send IR Signal
@@ -22,8 +20,9 @@
   Square to go back form auto to manual
   Triangle - free
   PAD UP - free
-  PAD DOWN
->>>>>>> Stashed changes
+  PAD DOWN - free
+  PAD LEFT - free
+  PAD RIGHT - free
 
   Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
   Date: 1/29/24

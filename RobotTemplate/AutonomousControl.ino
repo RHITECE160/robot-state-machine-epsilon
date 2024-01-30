@@ -13,7 +13,7 @@
 int wheelDiameterInches = 2.7559055;
 int encoderResolution = 360;
 
-void AutonomousControl()
+void AutonomousControl(Servo mySero)
 {
 
   unsigned long myTime;

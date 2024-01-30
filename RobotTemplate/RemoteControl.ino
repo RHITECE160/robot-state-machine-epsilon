@@ -13,9 +13,10 @@
   Cross to force stop
   Circle to open claw
   Square to close claw
+  Triangle to send IR Signal 
 
-  Created by: Rohan Malipeddi
-  Date: 1/23/24
+  Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
+  Date: 1/29/24
   Version: 1.0
 */
 
@@ -79,6 +80,7 @@ void RemoteControl(PS2X Controller, Servo myServo) {
       Serial.println("R2 button pushed ");
       spinOtherWay();
     }
+    // press to light up the black candle
     else if(Controller.Button(PSB_TRIANGLE)){
       digitalWrite(IR_LED,HIGH);
       delay(1000);

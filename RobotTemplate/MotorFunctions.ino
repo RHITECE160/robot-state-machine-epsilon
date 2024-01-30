@@ -25,7 +25,7 @@
   2. void stop()
      - Stops both motors.
   
-  Created by: Rohan Malipeddi
+  Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
   Date: 1/22/24
   Version: 1.0
 */

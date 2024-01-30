@@ -45,7 +45,8 @@ Servo myServo;
 enum RobotState {
   INITIALIZE,
   MANUAL,
-  AUTONOMOUS
+  AUTONOMOUS,
+  LINEFOLLOWING
 };
 
 // Define lower-level state machine for AUTONOMOUS mode
@@ -67,11 +68,10 @@ unsigned long lastActionTime = 0;  // Variable to store the last time an action 
 
 // Tuning Parameters
 const uint16_t lowSpeed = 15;
-const uint16_t fastSpeed = 30;
+const uint16_t fastSpeed = 20;
 const unsigned long movementDuration = 2000;  // Duration for movement forward autonomously in milliseconds
 
 const int servoPin = 38;
-
 
 void setup() {
   Serial.begin(57600);
@@ -108,11 +108,30 @@ void setup() {
   // set pushbutton on breadboard to use internal pullup resistor
   pinMode(START_BUTTON, INPUT_PULLUP);
 
+  setupWaitBtn(START_BUTTON);
+  delay(1000);
+
+  setupLed(RED_LED);
+
 }
 
 void loop() {
   // Read input from PlayStation controller
   ps2x.read_gamepad();
+<<<<<<< Updated upstream
+=======
+  //float distance = 3;
+
+  // if(ps2x.ButtonPressed(PSB_R1)){
+  //   autonomousSpinRight(10);
+  //   automomousForward(10,10);
+  // }
+  // else if(ps2x.ButtonPressed(PSB_L1)){
+  //   autonomousSpinLeft(10);
+  //   autonomousForward(10,10);
+  // }
+
+>>>>>>> Stashed changes
 
   // Update state machine based on button input
   updateStateMachine();
@@ -128,6 +147,13 @@ void loop() {
   to change state from INITIALIZE to MANUAL. The playstation circle 
   button is used to change the state from MANUAL to AUTONOMOUS.
 */
+/*
+-> Goes into manual state when button on breadboard is pressed
+-> Circle pressed goes into autonomous
+-> while in autonomous, if square is pressed, it goes into line following
+-> wihle in line following, if triangle is pressed, goes into manual
+      -> also sets the AutoCurrentState to be Start
+*/
 void updateStateMachine() {
   switch (RobotCurrentState) {
     case INITIALIZE:
@@ -142,6 +168,7 @@ void updateStateMachine() {
       Serial.print("in manual state........");
       if (ps2x.Button(PSB_CIRCLE)) {
         // go to Autonomous state when circle button pushed
+        Serial.print("Circle pressed going to auto........");
         RobotCurrentState = AUTONOMOUS;
       }
       break;
@@ -150,9 +177,19 @@ void updateStateMachine() {
       Serial.print("in autonomous state........");
       if (ps2x.Button(PSB_SQUARE)) {
         // go to manual state when square button pushed
+        Serial.print("square pressed going to line following.......");
+        RobotCurrentState = LINEFOLLOWING;
+      }
+      break;
+
+    case LINEFOLLOWING:
+      Serial.print("in line following state........");
+      if(ps2x.Button(PSB_TRIANGLE)) {
+        //go to Line following mode when triangle pressed
+        Serial.print("traingle pressed going to manual.......");
         RobotCurrentState = MANUAL;
         // reset autonomous state to start state for the next time
-        AutoCurrentState = START; 
+        AutoCurrentState = START;
       }
 
       break;
@@ -186,6 +223,12 @@ void executeStateActions() {
       Serial.println("Manual Mode");
       RemoteControl(ps2x, myServo);
       // Add any additional actions for the manual state
+      break;
+
+    case LINEFOLLOWING:
+      //Performs line following based on controller input
+      Serial.print("Line Following mode");
+      followLine(ps2x);
       break;
   }
 }

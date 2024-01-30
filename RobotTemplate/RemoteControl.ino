@@ -25,8 +25,8 @@
   PAD DOWN
 >>>>>>> Stashed changes
 
-  Created by: Rohan Malipeddi
-  Date: 1/23/24
+  Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
+  Date: 1/29/24
   Version: 1.0
 */
 
@@ -90,15 +90,6 @@ void RemoteControl(PS2X Controller, Servo myServo) {
       Serial.println("R2 button pushed ");
       spinOtherWay();
     }
-<<<<<<< Updated upstream
-=======
-    // press to light up the black candle
-    else if(Controller.Button(PSB_CROSS)){
-      digitalWrite(IR_LED,HIGH);
-      delay(1000);
-      digitalWrite(IR_LED,LOW);
-    }
->>>>>>> Stashed changes
     //default stop if nothing pressed
     else {
       stop();

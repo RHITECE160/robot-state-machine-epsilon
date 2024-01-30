@@ -73,6 +73,8 @@ const unsigned long movementDuration = 2000;  // Duration for movement forward a
 
 const int servoPin = 38;
 
+bool isCalibrationComplete = false;
+
 void setup() {
   Serial.begin(57600);
   Serial.print("Starting up Robot code...... ");
@@ -112,6 +114,11 @@ void setup() {
   delay(1000);
 
   setupLed(RED_LED);
+
+  if (isCalibrationComplete == false) {
+        floorCalibration();
+        isCalibrationComplete = true;
+  }
 
 }
 
@@ -214,7 +221,7 @@ void executeStateActions() {
     case LINEFOLLOWING:
       //Performs line following based on controller input
       Serial.print("Line Following mode");
-      followLine(ps2x);
+      followLine(ps2x, myServo);
       break;
   }
 }

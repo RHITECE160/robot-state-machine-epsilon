@@ -92,7 +92,7 @@ void floorCalibration()
 }
 
 //bool isCalibrationComplete = false;
-void followLine(PS2X ps2, Servo myServo)
+void followLine(Servo myServo)
 {
     /* Run this setup only once */
     // if (isCalibrationComplete == false) {
@@ -115,8 +115,8 @@ void followLine(PS2X ps2, Servo myServo)
           setMotorSpeed(LEFT_MOTOR, normalSpeed);
           setMotorSpeed(RIGHT_MOTOR, normalSpeed);
       }
-      ps2.read_gamepad();
-      if(ps2.Button(PSB_PAD_UP)) {
+      //ps2.read_gamepad();
+      if(getBumpSwitchPressed() > 0) {
         follow = false;
       }
     }

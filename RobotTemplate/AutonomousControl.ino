@@ -22,7 +22,12 @@
 int wheelDiameterInches = 2.7559055;
 int encoderResolution = 360;
 
+<<<<<<< Updated upstream
 void AutonomousControl()
+=======
+//autonomous control iterates through the different movement functions to turn the corner and proceed to the end of the lane
+void AutonomousControl(Servo myServo)
+>>>>>>> Stashed changes
 {
   // put your code here to run in Autonomous control mode
 
@@ -71,7 +76,18 @@ void AutonomousControl()
 
     case AUTO_ACTION4:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION4");
+<<<<<<< Updated upstream
       // Add state instructions here
+=======
+      //follow line until the specific point and then deposit the marigold
+      delay(200);             // Placeholder delay
+      followLine(myServo);
+      break;
+
+    case AUTO_ACTION5:
+      Serial.println("in Autonomous mode the current state: AUTO_ACTION5");
+      //follow line until the specific point and then deposit the marigold
+>>>>>>> Stashed changes
       delay(1000);             // Placeholder delay
       AutoCurrentState = IDLE; // Transition to next state
       break;

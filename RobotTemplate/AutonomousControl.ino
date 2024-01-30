@@ -45,33 +45,34 @@ void AutonomousControl()
     case AUTO_ACTION1:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION1");
       // move forward for a time, then stop, and transition to the next state
-      forward(10);
-      // Check if the movement duration has passed
-      if (millis() - lastActionTime >= movementDuration)
-      {
-        stop();                          // stop the forward movement
-        AutoCurrentState = AUTO_ACTION2; // Transition to next state
-        lastActionTime = millis();       // Record the time when the next state started
-      }
+      autonomousForward(20,10);
+      AutoCurrentState = AUTO_ACTION2;
       break;
 
     case AUTO_ACTION2:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION2");
       // Add state instructions here
-      delay(1000);                     // Placeholder delay
+      delay(200);       
+                    // Placeholder delay
+      autonomousSpinRight(10);
       AutoCurrentState = AUTO_ACTION3; // Transition to next state
       break;
 
     case AUTO_ACTION3:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION3");
       // Add state instructions here
-      delay(1000);                     // Placeholder delay
+      delay(200);                     // Placeholder delay
+      autonomousForward(20,10);
       AutoCurrentState = AUTO_ACTION4; // Transition to next state
       break;
 
     case AUTO_ACTION4:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION4");
-      // Add state instructions here
+      //follow line until the specific point and then deposit the marigold
+
+
+
+
       delay(1000);             // Placeholder delay
       AutoCurrentState = IDLE; // Transition to next state
       break;

@@ -37,6 +37,7 @@
 #define PS2_CLK 35  //P6.7 <-> blue wire
 #define START_BUTTON 18  //P3.0 a push button on top of the breadboard
 
+
 // Create an instance of the playstation controller object
 PS2X ps2x;
 Servo myServo;
@@ -120,10 +121,10 @@ void loop() {
   ps2x.read_gamepad();
 
   // Update state machine based on button input
-  //updateStateMachine();
+  updateStateMachine();
 
   // Perform actions based on the current state
-  //executeStateActions();
+  executeStateActions();
 }
 
 /* updateStateMachine function

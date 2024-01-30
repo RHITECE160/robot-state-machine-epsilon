@@ -91,15 +91,15 @@ void floorCalibration()
     enableMotor(BOTH_MOTORS);
 }
 
-bool isCalibrationComplete = false;
-void followLine(PS2X ps2)
+//bool isCalibrationComplete = false;
+void followLine(PS2X ps2, Servo myServo)
 {
     /* Run this setup only once */
-    if (isCalibrationComplete == false) {
-        Controller = ps2;
-        floorCalibration();
-        isCalibrationComplete = true;
-    }
+    // if (isCalibrationComplete == false) {
+    //     Controller = ps2;
+    //     floorCalibration();
+    //     isCalibrationComplete = true;
+    // }
 
     bool follow = true;
     while(follow) {
@@ -115,9 +115,10 @@ void followLine(PS2X ps2)
           setMotorSpeed(LEFT_MOTOR, normalSpeed);
           setMotorSpeed(RIGHT_MOTOR, normalSpeed);
       }
-      if(START_BUTTON) {
+      if(ps2.Button(PSB_PAD_UP)) {
         follow = false;
       }
+      Openclaw(myServo);
     }
     Serial.print("Line Following stopped");
 }

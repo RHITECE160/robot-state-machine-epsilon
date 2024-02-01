@@ -10,10 +10,16 @@
   Left joystick to move forward, back, right and left
   R2 to spin
   L2 to spinOtherWay
-  Cross to force stop
-  Circle to open claw
-  Square to close claw
-  Triangle to send IR Signal 
+  R1 to open claw
+  L1 to close claw
+  Cross to send IR Signal
+  Circle to go into autonomous
+  Square to go back form auto to manual
+  Triangle - free
+  PAD UP - free
+  PAD DOWN - free
+  PAD LEFT - free
+  PAD RIGHT - free
 
   Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
   Date: 1/29/24
@@ -84,7 +90,7 @@ void RemoteControl(PS2X Controller, Servo myServo) {
     else if(Controller.Button(PSB_CROSS)){
       digitalWrite(IR_LED_PIN,HIGH);
       Serial.println("Lighting Regular Candle");
-      delay(1000);
+      delay(100);
       digitalWrite(IR_LED_PIN,LOW);
     }
     else if(Controller.Button(PSB_PAD_UP)){

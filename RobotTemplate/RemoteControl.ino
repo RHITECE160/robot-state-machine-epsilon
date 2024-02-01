@@ -82,9 +82,16 @@ void RemoteControl(PS2X Controller, Servo myServo) {
     }
     // press to light up the black candle
     else if(Controller.Button(PSB_CROSS)){
-      digitalWrite(IR_LED,HIGH);
+      digitalWrite(IR_LED_PIN,HIGH);
+      Serial.println("Lighting Regular Candle");
       delay(1000);
-      digitalWrite(IR_LED,LOW);
+      digitalWrite(IR_LED_PIN,LOW);
+    }
+    else if(Controller.Button(PSB_PAD_UP)){
+      goldVotive();
+    }
+    else if(Controller.Button(PSB_PAD_DOWN)){
+      catrinaSkull();
     }
     //default stop if nothing pressed
     else {

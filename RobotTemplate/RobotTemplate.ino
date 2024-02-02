@@ -173,11 +173,11 @@ void updateStateMachine() {
 
     case AUTONOMOUS:
       Serial.print("in autonomous state........");
-      if (ps2x.Button(PSB_SQUARE)) {
-        // go to manual state when square button pushed
-        Serial.print("square pressed going to manual.......");
-        RobotCurrentState = MANUAL;
-      }
+      // if (ps2x.Button(PSB_SQUARE)) {
+      //   // go to manual state when square button pushed
+      //   Serial.print("square pressed going to manual.......");
+      //   RobotCurrentState = MANUAL;
+      // }
       break;
 
     // case LINEFOLLOWING:

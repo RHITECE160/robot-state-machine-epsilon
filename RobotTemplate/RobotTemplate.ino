@@ -41,14 +41,15 @@
 #define PS2_SEL 34  //P2.3 <-> yellow wire (also called attention)
 #define PS2_CLK 35  //P6.7 <-> blue wire
 #define START_BUTTON 18  //P3.0 a push button on top of the breadboard
-#define IR_LED_PIN 19 //P2.5 yellow wire to IR LED
+#define IR_LED_SIMPLE 5  //P4.1 a blue wire 
+#define IR_LED_TRANSMITTER 19 //P2.5 yellow wire to IR LED
 #define IR_RECEIVER_PIN 33 
 
 // Create an instance of the playstation controller object
 PS2X ps2x;
 Servo myServo;
 
-IRsender sendIR(IR_LED_PIN);
+IRsender sendIR(IR_LED_TRANSMITTER);
 IRreceiver receiveIR(IR_RECEIVER_PIN);
 IRData IRsent;
 IRData  IRreceived;
@@ -130,7 +131,7 @@ void setup() {
   setupLed(RED_LED);
   enableTXLEDFeedback(GREEN_LED); //Green LED means Transmitting IR
   enableRXLEDFeedback(BLUE_LED);  //Blue LED means Receiving IR
-
+  pinMode(IR_LED_SIMPLE,OUTPUT);
   if(sendIR.initIRSender()){
     Serial.print("IR Sender Setup Worked, ");
   }
@@ -188,7 +189,7 @@ void updateStateMachine() {
 
     case MANUAL:
       Serial.print("in manual state........");
-      if (ps2x.Button(PSB_CIRCLE)) {
+      if (ps2x.Button(PSB_R3) && ps2x.Button(PSB_L3)) {
         // go to Autonomous state when circle button pushed
         Serial.print("Circle pressed going to auto........");
         RobotCurrentState = AUTONOMOUS;

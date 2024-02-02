@@ -33,35 +33,34 @@ an RLSK robot using to implement remote controller.
 
 void RemoteControl(PS2X Controller, Servo myServo) {
     //checks if the joystick is moved
-    if (Controller.Analog(PSS_LY) != 128) {
+    if (Controller.Analog(PSS_LY) >= 255*0.55 || Controller.Analog(PSS_LY) <= 255*0.45) {
       //assigning a value for y position of the joystick
       int yVal = Controller.Analog(PSS_LY);
       //the joystick becomes less as I move it forward, so condition is opposite
       if(yVal < 128) {  
         //mapped to specific speeds
-        int speedSetting = map((255-Controller.Analog(PSS_LY)), 128, 255, 0, 20);
+        int speedSetting = map((255-Controller.Analog(PSS_LY)), 255*0.55, 255, 0, 20);
         forward(speedSetting);
       }
       else {
         //mapped to specific speeds
-        int speedSetting = map((Controller.Analog(PSS_LY)-128), 0, 128, 0, 20);
+        int speedSetting = map((Controller.Analog(PSS_LY)-128), 0, 255*0.45, 0, 20);
         back(speedSetting);
       }
-
     } 
     //joystick moved?
-    else if(Controller.Analog(PSS_LX) != 128) {
+    else if(Controller.Analog(PSS_LX) >= 255*0.55 || Controller.Analog(PSS_LX) <= 255*0.45) {
       //assigning a value for x position of the joystick
       int xVal = Controller.Analog(PSS_LX);
       //horizontal motoin moves like normal
       if(xVal > 128) {
         //mapped to specific speeds
-        int speedSetting = map(Controller.Analog(PSS_LX), 128, 255, 0, 10);
+        int speedSetting = map(255-Controller.Analog(PSS_LX), 255*0.55, 255, 0, 10);
         TurnRight(speedSetting);
       }
       else {
         //mapped to specific speeds
-        int speedSetting = map((Controller.Analog(PSS_LX)-128), 0, 128, 0, 10);
+        int speedSetting = map((Controller.Analog(PSS_LX)-128), 0, 255*0.45, 0, 10);
         TurnLeft(speedSetting);
       }
     }
@@ -87,11 +86,14 @@ void RemoteControl(PS2X Controller, Servo myServo) {
       spinOtherWay();
     }
     // press to light up the black candle
-    else if(Controller.Button(PSB_CROSS)){
-      digitalWrite(IR_LED_PIN,HIGH);
+    else if(Controller.Button(PSB_PAD_LEFT)){
       Serial.println("Lighting Regular Candle");
       delay(100);
-      digitalWrite(IR_LED_PIN,LOW);
+
+      digitalWrite(IR_LED_SIMPLE,HIGH);
+      delay(100);
+
+      digitalWrite(IR_LED_SIMPLE,LOW);
     }
     else if(Controller.Button(PSB_PAD_UP)){
       goldVotive();

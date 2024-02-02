@@ -122,6 +122,8 @@ void followLine(Servo myServo)
     }
     Openclaw(myServo);
     Serial.print("Line Following stopped");
+    RobotCurrentState = MANUAL;
+    AutoCurrentState = START;
 }
 
 // void findLine() {

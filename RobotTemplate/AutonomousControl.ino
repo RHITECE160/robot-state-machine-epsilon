@@ -57,7 +57,7 @@ void AutonomousControl(Servo mySero)
       break;
 
     case AUTO_ACTION4:
-      Serial.println("in Autonomous mode the current state: AUTO_ACTION3");
+      Serial.println("in Autonomous mode the current state: AUTO_ACTION4");
       // Add state instructions here
       delay(200);                     // Placeholder delay
       followLine(mySero);
@@ -65,10 +65,10 @@ void AutonomousControl(Servo mySero)
       break;
     
     case AUTO_ACTION5:
-      Serial.println("in Autonomous mode the current state: AUTO_ACTION4");
+      Serial.println("in Autonomous mode the current state: AUTO_ACTION5");
       // Add state instructions here
       delay(1000);             // Placeholder delay
-      AutoCurrentState = IDLE; // Transition to next state
+      AutoCurrentState = START; // Transition to next state
       break;
 
     default:

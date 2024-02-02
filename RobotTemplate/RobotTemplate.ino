@@ -25,12 +25,15 @@
      blue wire          P6.7
 
      IR LED             P2.5
+     IR Transmitter     P5.1
 */
 
 // Load libraries used
-#include "SimpleRSLK.h"
+#include <SimpleRSLK.h>
 #include <Servo.h>
-#include "PS2X_lib.h"
+#include <PS2X_lib.h>
+#include <TinyIRremote.h>
+
 
 // Define pin numbers for the button on the PlayStation controller
 #define PS2_DAT 14  //P1.7 <-> brown wire
@@ -38,12 +41,18 @@
 #define PS2_SEL 34  //P2.3 <-> yellow wire (also called attention)
 #define PS2_CLK 35  //P6.7 <-> blue wire
 #define START_BUTTON 18  //P3.0 a push button on top of the breadboard
-#define IR_LED 19 //P2.5 yellow wire to IR LED
-
+#define IR_LED_PIN 19 //P2.5 yellow wire to IR LED
+#define IR_RECEIVER_PIN 33 
 
 // Create an instance of the playstation controller object
 PS2X ps2x;
 Servo myServo;
+
+IRsender sendIR(IR_LED_PIN);
+IRreceiver receiveIR(IR_RECEIVER_PIN);
+IRData IRsent;
+IRData  IRreceived;
+
 
 // Define high-level state machine
 enum RobotState {
@@ -119,6 +128,21 @@ void setup() {
   delay(1000);
 
   setupLed(RED_LED);
+  enableTXLEDFeedback(GREEN_LED); //Green LED means Transmitting IR
+  enableRXLEDFeedback(BLUE_LED);  //Blue LED means Receiving IR
+
+  if(sendIR.initIRSender()){
+    Serial.print("IR Sender Setup Worked, ");
+  }
+  else{
+    Serial.print("IR Sender Setup Failed, ");
+  }
+  if(receiveIR.initIRReceiver()){
+    Serial.println("IR Receiver Setup Worked");
+  }
+  else{
+    Serial.println("IR Receiver Setup Failed");
+  }
 
   if (isCalibrationComplete == false) {
         floorCalibration();

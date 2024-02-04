@@ -57,7 +57,7 @@ void TurnRight(int speed) {
   setMotorDirection(LEFT_MOTOR, MOTOR_DIR_FORWARD);
   setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_FORWARD);
   setMotorSpeed(RIGHT_MOTOR, 0);
-  setMotorSpeed(LEFT_MOTOR, speed+30);
+  setMotorSpeed(LEFT_MOTOR, speed);
 }
 
 //Actives right motor on speed specified and other on lowspeed or 0

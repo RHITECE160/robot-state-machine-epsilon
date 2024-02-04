@@ -114,14 +114,25 @@ void autonomousForward(float inchesToTravel, int speed)
   /* "Turn on" the motor */
   enableMotor(BOTH_MOTORS);
 
-  /* Set motor speed */
-  setMotorSpeed(BOTH_MOTORS, speed);
+
 
   /* Drive motor until it has received x encoder pulses */
   while (totalCount < target)
   {
     leftCount = getEncoderLeftCnt();
     rightCount = getEncoderRightCnt();
+      /* Set motor speed */
+    if(leftCount<rightCount){
+      setMotorSpeed(LEFT_MOTOR, speed+0.02);
+      setMotorSpeed(RIGHT_MOTOR,speed);
+    }
+    else if(rightCount<leftCount){
+      setMotorSpeed(LEFT_MOTOR,speed);
+      setMotorSpeed(RIGHT_MOTOR,speed+0.02);
+    }
+    else{
+      setMotorSpeed(BOTH_MOTORS,speed);
+    }
     totalCount = (leftCount + rightCount) / 2;
   }
   setMotorSpeed(BOTH_MOTORS, 0);

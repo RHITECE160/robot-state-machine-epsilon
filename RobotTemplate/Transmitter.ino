@@ -1,3 +1,12 @@
+/*
+Functions to light the candles that need specific transmissions
+  uses objects from:
+  RobotTemplate.ino
+
+  written for the MSP432401 board
+  Author: Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
+  Last revised: 2/5/2024
+*/
 //function to light a catrina skull when called
 void catrinaSkull(){
     Serial.println("Lighting Catrina");

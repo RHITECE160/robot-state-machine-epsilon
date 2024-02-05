@@ -13,7 +13,7 @@
 
   written for the MSP432401 board
   Author: Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
-  Last revised: 1/23/2024
+  Last revised: 2/5/2024
 
 ***** Hardware Connections: *****
      start button       P3.0

@@ -15,7 +15,7 @@
   L1 to close claw
   Cross - Free
   Circle- Free
-  Square to go back form auto to manual
+  Square to go back from auto to manual
   Triangle - Free
   PAD UP - light gold votive
   PAD DOWN - light catrina

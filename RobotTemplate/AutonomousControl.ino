@@ -6,7 +6,7 @@
   the motors stop. Then the robot moves forward using the motor encoders
 
   Created by: Jennings Brooklyn, Rohan Malipeddi, Luis
-  Date: Current Date
+  Date: 2/5/2024
   Version: 1.0
 */
 

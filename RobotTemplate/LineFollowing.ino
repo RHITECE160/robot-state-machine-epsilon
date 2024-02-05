@@ -1,38 +1,16 @@
 /*
- * Energia Robot Library for Texas Instruments' Robot System Learning Kit (RSLK)
- * Line Following Example
- *
  * Summary:
  * This example has the TI Robotic System Learning Kit (TI RSLK) follow a line
  * using a basic line following algorithm. This example works on a dark floor with
  * a white line, but may be changed by modifying the _lineColor_ value. The robot 
  * first needs to be calibrated (on floor without line). Then place the robot
  * on the line and hit the left button again to begin the line following.
- *
- * How to run:
- * 1) Place the robot on floor away from line to calibrate to background surface.
- * 2) Push left button on Launchpad to have the robot perform calibration.
- * 3) Place the robot center on the line you want it to follow.
- * 4) Push left button again to have the robot begin to follow the line.
- *
- * Parts Info:
- * o Black eletrical tape or white electrical tape. Masking tape does not work well
- *   with IR sensors.
- *
- * Learn more about the classes, variables and functions used in this library by going to:
- * https://ndroid.github.io/msp432-core/RSLK/
- *
- * Learn more about the TI RSLK by going to http://www.ti.com/rslk
- *
- * created by Franklin Cooper Jr.
- * modified by chris miller 
- *
- * This example code is in the public domain.
- */
 
-/* Include RSLK library */
-//#include "SimpleRSLK.h"
+  written for the MSP432401 board
+  Author: Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
+  Last revised: 2/5/2024
 
+  
 /* Modify the following line to use an alternate UART interface (i.e. Serial1/2/3) */
 #define UART_SERIAL Serial
 

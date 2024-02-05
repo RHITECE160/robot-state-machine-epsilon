@@ -12,9 +12,11 @@
 
 int wheelDiameterInches = 2.7559055;
 int encoderResolution = 360;
+int autoCount = 0; 
 
 void AutonomousControl(Servo mySero)
 {
+  autoCount += 1; 
 
   unsigned long myTime;
 
@@ -44,9 +46,15 @@ void AutonomousControl(Servo mySero)
     case AUTO_ACTION2:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION2");
       // Add state instructions here
-      delay(200);       
-                    // Placeholder delay
-      autonomousSpinRight(10);
+      delay(200);// Placeholder delay
+      // going towards the grave 
+      if (autoCount % 2 == 1){
+        autonomousSpinRight(10);
+      }
+      // going away from the grave
+      else{
+        autonomousSpinLeft(10); 
+      }
       AutoCurrentState = AUTO_ACTION3; // Transition to next state
       break;
 

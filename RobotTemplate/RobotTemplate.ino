@@ -12,7 +12,7 @@
   RemoteControl.ino
 
   written for the MSP432401 board
-  Author: Walter Deborah, Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
+  Author: Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
   Last revised: 1/23/2024
 
 ***** Hardware Connections: *****
@@ -167,12 +167,12 @@ void loop() {
   This function changes the high-level state based on user input. 
   
   For an example, a SPST button (using internal pullup resistor) is used
-  to change state from INITIALIZE to MANUAL. The playstation circle 
-  button is used to change the state from MANUAL to AUTONOMOUS.
+  to change state from INITIALIZE to MANUAL. The playstation Joystick buttons 
+  are used to change the state from MANUAL to AUTONOMOUS.
 */
 /*
 -> Goes into manual state when button on breadboard is pressed
--> Circle pressed goes into autonomous
+-> Joysticks pressed goes into autonomous
 -> while in autonomous, if square is pressed, it goes into line following
 -> wihle in line following, if triangle is pressed, goes into manual
       -> also sets the AutoCurrentState to be Start
@@ -190,8 +190,8 @@ void updateStateMachine() {
     case MANUAL:
       Serial.print("in manual state........");
       if (ps2x.Button(PSB_R3) && ps2x.Button(PSB_L3)) {
-        // go to Autonomous state when circle button pushed
-        Serial.print("Circle pressed going to auto........");
+        // go to Autonomous state when Joysticks are both pushed
+        Serial.print("Joysticks pressed going to auto........");
         RobotCurrentState = AUTONOMOUS;
       }
       break;

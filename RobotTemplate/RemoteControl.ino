@@ -8,21 +8,22 @@
 
   Button map:
   Left joystick to move forward, back, right and left
+  R3 and R3 to run autonomous
   R2 to spin
   L2 to spinOtherWay
   R1 to open claw
   L1 to close claw
-  Cross to send IR Signal
-  Circle to go into autonomous
+  Cross - Free
+  Circle- Free
   Square to go back form auto to manual
-  Triangle - free
-  PAD UP - free
-  PAD DOWN - free
-  PAD LEFT - free
+  Triangle - Free
+  PAD UP - light gold votive
+  PAD DOWN - light catrina
+  PAD LEFT - light candle
   PAD RIGHT - free
 
   Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
-  Date: 1/29/24
+  Date: 2/4/24
   Version: 1.0
 */
 
@@ -72,12 +73,12 @@ void RemoteControl(PS2X Controller, Servo myServo) {
     }
     //claw open map
     else if(Controller.Button(PSB_R1)) {
-      Serial.println("Circle button pressed");
+      Serial.println("R1 pressed");
       Openclaw(myServo);
     } 
     //claw close map
     else if(Controller.Button(PSB_L1)) {
-      Serial.println("Square button pressed");
+      Serial.println("L1 Pressed");
       Closeclaw(myServo);
     }
     //spin other way map

@@ -91,7 +91,11 @@ void floorCalibration()
     enableMotor(BOTH_MOTORS);
 }
 
-//bool isCalibrationComplete = false;
+
+
+/*
+-> Follows the line after line following and as it reaches the end, the claw is opened as bump switch is hit
+*/
 void followLine(Servo myServo)
 {
     /* Run this setup only once */
@@ -116,14 +120,12 @@ void followLine(Servo myServo)
           setMotorSpeed(RIGHT_MOTOR, normalSpeed);
       }
       //ps2.read_gamepad();
-      if(getBumpSwitchPressed() > 0) {
+      if(getBumpSwitchPressed() > 0) {               //bump pressed
         follow = false;
       }
     }
-    Openclaw(myServo);
+    Openclaw(myServo);                             //opens claw
     Serial.print("Line Following stopped");
-    RobotCurrentState = MANUAL;
-    AutoCurrentState = START;
 }
 
 // void findLine() {

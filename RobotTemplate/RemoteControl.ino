@@ -12,13 +12,19 @@
   L2 to spinOtherWay
   R1 to open claw
   L1 to close claw
+<<<<<<< Updated upstream
   Cross to send IR Signal
   Circle to go into autonomous
   Square to go back form auto to manual
+=======
+  Cross - free
+  Circle - free
+  Square - free
+>>>>>>> Stashed changes
   Triangle - free
-  PAD UP - free
-  PAD DOWN - free
-  PAD LEFT - free
+  PAD UP - gold votive
+  PAD DOWN - catrina
+  PAD LEFT - black votive
   PAD RIGHT - free
 
   Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings

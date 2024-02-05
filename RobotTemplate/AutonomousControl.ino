@@ -68,7 +68,7 @@ void AutonomousControl(Servo mySero)
       Serial.println("in Autonomous mode the current state: AUTO_ACTION5");
       // Add state instructions here
       delay(1000);             // Placeholder delay
-      AutoCurrentState = START; // Transition to next state
+      AutoCurrentState = IDLE; // Transition to next state
       break;
 
     default:
@@ -79,6 +79,8 @@ void AutonomousControl(Servo mySero)
   // The code will exit the while loop when IDLE state is reached
   Serial.println("State: IDLE");
   // Add IDLE state instructions here
+  RobotCurrentState = MANUAL;    //switch to manual 
+  AutoCurrentState = START;      //Set to start again to go into auto again
 }
 
 //function to keep track of the current count of the distance traveled by a point on the tip of the wheels

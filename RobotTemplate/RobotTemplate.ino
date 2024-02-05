@@ -1,10 +1,11 @@
-/*Epsilon Final project code 
-  A template for the final project code that uses multiple files
-  for modularity. The compiler first loads the principal file 
-  (the one with the same name as the folder) and then loads 
-  the others in alphabetical order. Variables defined in an 
-  earlier file will be visible to code in a file that is loaded 
-  later, but not vice-versa. 
+/*Name: Epsilon Milestone 3 code 
+  Author: Walter Deborah, Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
+  Last revised: 2/5/2024
+
+  This code calibrates robot to current light setting and then goes into manual 
+  based on the start button on breadboard and then goes into auto if prompted by
+  the remote control. It then goes into manual again, at which the cycle repeats
+  again.
 
   Calls functions in files:
   AutonomousControl.ino
@@ -12,8 +13,7 @@
   RemoteControl.ino
 
   written for the MSP432401 board
-  Author: Walter Deborah, Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
-  Last revised: 1/23/2024
+  
 
 ***** Hardware Connections: *****
      start button       P3.0
@@ -24,7 +24,13 @@
      yellow wire        P2.3
      blue wire          P6.7
 
+<<<<<<< Updated upstream
      IR LED             P2.5
+=======
+     IR LED             P4.1
+     IR Transmitter     P2.5
+     IR Reciever        P5.1
+>>>>>>> Stashed changes
 */
 
 // Load libraries used
@@ -38,8 +44,14 @@
 #define PS2_SEL 34  //P2.3 <-> yellow wire (also called attention)
 #define PS2_CLK 35  //P6.7 <-> blue wire
 #define START_BUTTON 18  //P3.0 a push button on top of the breadboard
+<<<<<<< Updated upstream
 #define IR_LED 19 //P2.5 yellow wire to IR LED
 
+=======
+#define IR_LED_SIMPLE 5  //P4.1 a blue wire 
+#define IR_LED_TRANSMITTER 19 //P2.5 yellow wire to IR LED
+#define IR_RECEIVER_PIN 33 //P5.1 
+>>>>>>> Stashed changes
 
 // Create an instance of the playstation controller object
 PS2X ps2x;
@@ -147,10 +159,8 @@ void loop() {
 */
 /*
 -> Goes into manual state when button on breadboard is pressed
--> Circle pressed goes into autonomous
--> while in autonomous, if square is pressed, it goes into line following
--> wihle in line following, if triangle is pressed, goes into manual
-      -> also sets the AutoCurrentState to be Start
+-> L3 and R3 pressed goes into autonomous
+-> while in autonomous, does the line following and then to manual
 */
 void updateStateMachine() {
   switch (RobotCurrentState) {
@@ -173,11 +183,19 @@ void updateStateMachine() {
 
     case AUTONOMOUS:
       Serial.print("in autonomous state........");
+<<<<<<< Updated upstream
       // if (ps2x.Button(PSB_SQUARE)) {
       //   // go to manual state when square button pushed
       //   Serial.print("square pressed going to manual.......");
       //   RobotCurrentState = MANUAL;
       // }
+=======
+      //  if (ps2x.Button(PSB_SQUARE)) {
+      //    //go to manual state when square button pushed
+      //     Serial.print("square pressed going to manual.......");
+      //     RobotCurrentState = MANUAL;
+      //  }
+>>>>>>> Stashed changes
       break;
 
     // case LINEFOLLOWING:
@@ -221,6 +239,7 @@ void executeStateActions() {
       Serial.println("Manual Mode");
       RemoteControl(ps2x, myServo);
       // Add any additional actions for the manual state
+      if()
       break;
 
     // case LINEFOLLOWING:

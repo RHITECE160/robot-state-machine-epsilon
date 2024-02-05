@@ -19,3 +19,13 @@ void goldVotive(){
     sendIR.write(&IRsent);
     delay(100);
 }
+
+void blackVotive(){
+    Serial.println("Lighting Regular Candle");
+    delay(100);
+
+    digitalWrite(IR_LED_SIMPLE,HIGH);
+    delay(100);
+
+    digitalWrite(IR_LED_SIMPLE,LOW);
+}

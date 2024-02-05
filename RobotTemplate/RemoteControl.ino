@@ -87,13 +87,7 @@ void RemoteControl(PS2X Controller, Servo myServo) {
     }
     // pad left to light up the black candle
     else if(Controller.Button(PSB_PAD_LEFT)){
-      Serial.println("Lighting Regular Candle");
-      delay(100);
-
-      digitalWrite(IR_LED_SIMPLE,HIGH);
-      delay(100);
-
-      digitalWrite(IR_LED_SIMPLE,LOW);
+      blackVotive();
     }
     //pad up for lighting gold votive
     else if(Controller.Button(PSB_PAD_UP)){

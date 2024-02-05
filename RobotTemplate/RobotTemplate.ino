@@ -1,5 +1,5 @@
 /*Name: Epsilon Milestone 3 code 
-  Author: Walter Deborah, Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
+  Author: Walter Deborah, Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez Aguirre
   Last revised: 2/5/2024
 
   This code calibrates robot to current light setting and then goes into manual 
@@ -41,10 +41,11 @@
 #define PS2_CMD 15  //P1.6 <-> orange wire
 #define PS2_SEL 34  //P2.3 <-> yellow wire (also called attention)
 #define PS2_CLK 35  //P6.7 <-> blue wire
-#define START_BUTTON 18  //P3.0 a push button on top of the breadboard
-#define IR_LED_SIMPLE 5  //P4.1 a blue wire 
-#define IR_LED_TRANSMITTER 19 //P2.5 yellow wire to IR LED
-#define IR_RECEIVER_PIN 33 //P5.1 
+#define START_BUTTON 18  //P3.0 <-> push button on the breadboard
+#define IR_LED_SIMPLE 5  //P4.1 <-> blue wire 
+#define IR_LED_TRANSMITTER 19 //P2.5 <-> yellow wire to IR LED
+#define IR_RECEIVER_PIN 33 // P5.1 
+#define YELLOW_LED_PIN 26 //4.4 <-> orange wire to yellow LED
 
 // Create an instance of the playstation controller object
 PS2X ps2x;
@@ -98,6 +99,7 @@ void setup() {
   // Run setup code
   setupRSLK();
   myServo.attach(servoPin);
+  pinMode(YELLOW_LED_PIN, OUTPUT);
 
   // Initialize PlayStation controller
   delayMicroseconds(500 * 1000);  //added delay to give wireless ps2 module some time to startup, before configuring it
@@ -240,7 +242,6 @@ void executeStateActions() {
       Serial.println("Manual Mode");
       RemoteControl(ps2x, myServo);
       // Add any additional actions for the manual state
-      if()
       break;
 
     // case LINEFOLLOWING:

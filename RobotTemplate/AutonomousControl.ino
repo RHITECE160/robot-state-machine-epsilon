@@ -5,7 +5,7 @@
   The robot moves forward for a short time using a non-blocking delay, then
   the motors stop. Then the robot moves forward using the motor encoders
 
-  Created by: Jennings Brooklyn, Rohan Malipeddi, Luis
+  Created by: Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez Aguirre
   Date: Current Date
   Version: 1.0
 */
@@ -34,6 +34,8 @@ void AutonomousControl(Servo mySero)
 
     case AUTO_ACTION1:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION1");
+      // start the light sequence
+      lightTheWay();
       // move forward for a time, then stop, and transition to the next state
       autonomousForward(20,10);
       AutoCurrentState = AUTO_ACTION2;
@@ -53,6 +55,8 @@ void AutonomousControl(Servo mySero)
       // Add state instructions here
       delay(200);                     // Placeholder delay
       autonomousForward(20,10);
+      // finish light sequence
+      noMoreLight();
       AutoCurrentState = AUTO_ACTION4; // Transition to next state
       break;
 
@@ -200,4 +204,12 @@ void autonomousSpinRight(int speed){
     totalCount = (leftCount + rightCount) / 2;
   }
   setMotorSpeed(BOTH_MOTORS, 0);
+}
+
+void lightTheWay(){
+  digitalWrite(YELLOW_LED_PIN, HIGH);
+}
+
+void noMoreLight(){
+  digitalWrite(YELLOW_LED_PIN, LOW);
 }

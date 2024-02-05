@@ -3,8 +3,7 @@
   
   Description:
   This sketch provides functions for controlling an RLSK robot using a
-  playstation controller for input. A few actions are programed for an 
-  example. 
+  playstation controller for input.  
 
   Button map:
   Left joystick to move forward, back, right and left
@@ -12,15 +11,9 @@
   L2 to spinOtherWay
   R1 to open claw
   L1 to close claw
-<<<<<<< Updated upstream
-  Cross to send IR Signal
-  Circle to go into autonomous
-  Square to go back form auto to manual
-=======
   Cross - free
   Circle - free
   Square - free
->>>>>>> Stashed changes
   Triangle - free
   PAD UP - gold votive
   PAD DOWN - catrina
@@ -29,6 +22,7 @@
 
   Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
   Date: 1/29/24
+  Date Revised: 2/5/2024
   Version: 1.0
 */
 
@@ -91,7 +85,7 @@ void RemoteControl(PS2X Controller, Servo myServo) {
       Serial.println("R2 button pushed ");
       spinOtherWay();
     }
-    // press to light up the black candle
+    // pad left to light up the black candle
     else if(Controller.Button(PSB_PAD_LEFT)){
       Serial.println("Lighting Regular Candle");
       delay(100);
@@ -101,9 +95,11 @@ void RemoteControl(PS2X Controller, Servo myServo) {
 
       digitalWrite(IR_LED_SIMPLE,LOW);
     }
+    //pad up for lighting gold votive
     else if(Controller.Button(PSB_PAD_UP)){
       goldVotive();
     }
+    //pad down for lighting catrina
     else if(Controller.Button(PSB_PAD_DOWN)){
       catrinaSkull();
     }

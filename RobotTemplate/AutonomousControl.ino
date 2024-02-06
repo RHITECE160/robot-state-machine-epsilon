@@ -72,7 +72,10 @@ void AutonomousControl(Servo mySero)
       Serial.println("in Autonomous mode the current state: AUTO_ACTION4");
       // Add state instructions here
       delay(200);                     // Placeholder delay
-      followLine(mySero);
+      // goes into line following on the way to the graveyard ONLY
+      if (autoCount % 2 == 1){
+        followLine(mySero);
+      }
       AutoCurrentState = AUTO_ACTION5; // Transition to next state
       break;
     

@@ -16,17 +16,16 @@
   
 
 ***** Hardware Connections: *****
-     start button       P3.0
-     
      playstation connections
-     brown wire         P1.7 
-     orange wire        P1.6 
-     yellow wire        P2.3
-     blue wire          P6.7
+      brown wire         P1.7 
+      orange wire        P1.6 
+      yellow wire        P2.3
+      blue wire          P6.7
 
      IR LED             P4.1
      IR Transmitter     P2.5
      IR Reciever        P5.1
+     start button       P3.0
 */
 
 // Load libraries used

@@ -36,8 +36,10 @@ void AutonomousControl(Servo mySero)
 
     case AUTO_ACTION1:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION1");
-      // start the light sequence
-      lightTheWay();
+      // start the light sequencen only on the first itteration
+      if (autoCount == 1){
+        lightTheWay();
+      }
       // move forward for a time, then stop, and transition to the next state
       autonomousForward(20,10);
       AutoCurrentState = AUTO_ACTION2;
@@ -63,8 +65,10 @@ void AutonomousControl(Servo mySero)
       // Add state instructions here
       delay(200);                     // Placeholder delay
       autonomousForward(20,10);
-      // finish light sequence
-      noMoreLight();
+      // finish light sequence after first itteration
+      if (autoCount ==1){
+        noMoreLight();
+      }
       AutoCurrentState = AUTO_ACTION4; // Transition to next state
       break;
 

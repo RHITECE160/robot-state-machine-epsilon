@@ -26,8 +26,7 @@
      - Stops both motors.
   
   Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
-  Date: 2/5/24
-  Version: 1.0
+  Date: Feb 11, 2024
 */
 
 //included headers files just to be safe

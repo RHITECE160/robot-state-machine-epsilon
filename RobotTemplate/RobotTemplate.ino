@@ -1,6 +1,6 @@
 /*Name: Epsilon Milestone 3 code 
   Author: Walter Deborah, Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez Aguirre
-  Last revised: 2/5/2024
+  Last revised: Feb 11, 2024
 
   This code calibrates robot to current light setting and then goes into manual 
   based on the start button on breadboard and then goes into auto if prompted by
@@ -9,8 +9,11 @@
 
   Calls functions in files:
   AutonomousControl.ino
+  LineFollowing.ino
   MotorFunctions.ino
   RemoteControl.ino
+  Transmitter.ino
+
 
   written for the MSP432401 board
   
@@ -25,6 +28,7 @@
      IR LED             P4.1
      IR Transmitter     P2.5
      IR Reciever        P5.1
+
      start button       P3.0
 */
 
@@ -171,8 +175,7 @@ void loop() {
   For an example, a SPST button (using internal pullup resistor) is used
   to change state from INITIALIZE to MANUAL. The playstation circle 
   button is used to change the state from MANUAL to AUTONOMOUS.
-*/
-/*
+
 -> Goes into manual state when button on breadboard is pressed
 -> L3 and R3 pressed goes into autonomous
 -> while in autonomous, does the line following and then to manual
@@ -201,17 +204,8 @@ void updateStateMachine() {
       Serial.print("in autonomous state........");
       break;
 
-    // case LINEFOLLOWING:
-    //   Serial.print("in line following state........");
-    //   if(ps2x.Button(PSB_TRIANGLE)) {
-    //     //go to Line following mode when triangle pressed
-    //     Serial.print("traingle pressed going to manual.......");
-    //     RobotCurrentState = MANUAL;
-    //     // reset autonomous state to start state for the next time
-    //     AutoCurrentState = START;
-    //   }
-
-    //   break;
+    default:
+      break;
   }
 }
 
@@ -244,10 +238,7 @@ void executeStateActions() {
       // Add any additional actions for the manual state
       break;
 
-    // case LINEFOLLOWING:
-    //   //Performs line following based on controller input
-    //   Serial.print("Line Following mode");
-    //   followLine(ps2x, myServo);
-    //   break;
+    default:
+      break;
   }
 }

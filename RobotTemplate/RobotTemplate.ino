@@ -178,6 +178,7 @@ void loop() {
 -> while in autonomous, does the line following and then to manual
 */
 void updateStateMachine() {
+  
   switch (RobotCurrentState) {
     case INITIALIZE:
       if (digitalRead(START_BUTTON) == 0) {

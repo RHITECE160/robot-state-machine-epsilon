@@ -66,7 +66,7 @@ void AutonomousControl(Servo mySero)
       delay(200);                     // Placeholder delay
       autonomousForward(20,10);
       // finish light sequence after first itteration
-      if (autoCount ==1){
+      if (autoCount == 1){
         noMoreLight();
       }
       AutoCurrentState = AUTO_ACTION4; // Transition to next state

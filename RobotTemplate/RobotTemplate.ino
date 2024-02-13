@@ -1,6 +1,6 @@
 /*Name: Epsilon Milestone 3 code 
-  Author: Walter Deborah, Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
-  Last revised: 2/5/2024
+  Author: Walter Deborah, Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez Aguirre
+  Last revised: Feb 11, 2024
 
   This code calibrates robot to current light setting and then goes into manual 
   based on the start button on breadboard and then goes into auto if prompted by
@@ -9,25 +9,28 @@
 
   Calls functions in files:
   AutonomousControl.ino
+  LineFollowing.ino
   MotorFunctions.ino
   RemoteControl.ino
+  Transmitter.ino
+
 
   written for the MSP432401 board
   Author: Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
   Last revised: 2/5/2024
 
 ***** Hardware Connections: *****
-     start button       P3.0
-     
      playstation connections
-     brown wire         P1.7 
-     orange wire        P1.6 
-     yellow wire        P2.3
-     blue wire          P6.7
+      brown wire         P1.7 
+      orange wire        P1.6 
+      yellow wire        P2.3
+      blue wire          P6.7
 
      IR LED             P4.1
      IR Transmitter     P2.5
      IR Reciever        P5.1
+
+     start button       P3.0
 */
 
 // Load libraries used
@@ -42,10 +45,11 @@
 #define PS2_CMD 15  //P1.6 <-> orange wire
 #define PS2_SEL 34  //P2.3 <-> yellow wire (also called attention)
 #define PS2_CLK 35  //P6.7 <-> blue wire
-#define START_BUTTON 18  //P3.0 a push button on top of the breadboard
-#define IR_LED_SIMPLE 5  //P4.1 a blue wire 
-#define IR_LED_TRANSMITTER 19 //P2.5 yellow wire to IR LED
-#define IR_RECEIVER_PIN 33 //P5.1 
+#define START_BUTTON 18  //P3.0 <-> push button on the breadboard
+#define IR_LED_SIMPLE 5  //P4.1 <-> blue wire 
+#define IR_LED_TRANSMITTER 19 //P2.5 <-> yellow wire to IR LED
+#define IR_RECEIVER_PIN 33 // P5.1 
+#define YELLOW_LED_PIN 26 //4.4 <-> orange wire to yellow LED
 
 // Create an instance of the playstation controller object
 PS2X ps2x;
@@ -99,6 +103,7 @@ void setup() {
   // Run setup code
   setupRSLK();
   myServo.attach(servoPin);
+  pinMode(YELLOW_LED_PIN, OUTPUT);
 
   // Initialize PlayStation controller
   delayMicroseconds(500 * 1000);  //added delay to give wireless ps2 module some time to startup, before configuring it
@@ -169,10 +174,9 @@ void loop() {
   This function changes the high-level state based on user input. 
   
   For an example, a SPST button (using internal pullup resistor) is used
-  to change state from INITIALIZE to MANUAL. The playstation Joystick buttons 
-  are used to change the state from MANUAL to AUTONOMOUS.
-*/
-/*
+  to change state from INITIALIZE to MANUAL. The playstation circle 
+  button is used to change the state from MANUAL to AUTONOMOUS.
+
 -> Goes into manual state when button on breadboard is pressed
 -> Joysticks pressed goes into autonomous
 -> while in autonomous, if square is pressed, it goes into line following
@@ -180,6 +184,7 @@ void loop() {
       -> also sets the AutoCurrentState to be Start
 */
 void updateStateMachine() {
+  
   switch (RobotCurrentState) {
     case INITIALIZE:
       if (digitalRead(START_BUTTON) == 0) {
@@ -202,17 +207,8 @@ void updateStateMachine() {
       Serial.print("in autonomous state........");
       break;
 
-    // case LINEFOLLOWING:
-    //   Serial.print("in line following state........");
-    //   if(ps2x.Button(PSB_TRIANGLE)) {
-    //     //go to Line following mode when triangle pressed
-    //     Serial.print("traingle pressed going to manual.......");
-    //     RobotCurrentState = MANUAL;
-    //     // reset autonomous state to start state for the next time
-    //     AutoCurrentState = START;
-    //   }
-
-    //   break;
+    default:
+      break;
   }
 }
 
@@ -243,13 +239,9 @@ void executeStateActions() {
       Serial.println("Manual Mode");
       RemoteControl(ps2x, myServo);
       // Add any additional actions for the manual state
-      if()
       break;
 
-    // case LINEFOLLOWING:
-    //   //Performs line following based on controller input
-    //   Serial.print("Line Following mode");
-    //   followLine(ps2x, myServo);
-    //   break;
+    default:
+      break;
   }
 }

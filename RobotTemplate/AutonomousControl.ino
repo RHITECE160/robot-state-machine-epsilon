@@ -5,16 +5,19 @@
   The robot moves forward for a short time using a non-blocking delay, then
   the motors stop. Then the robot moves forward using the motor encoders
 
-  Created by: Jennings Brooklyn, Rohan Malipeddi, Luis
-  Date: 2/5/2024
-  Version: 1.0
+  Created by: Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez Aguirre
+  Date: Feb 11, 2024
 */
 
 int wheelDiameterInches = 2.7559055;
 int encoderResolution = 360;
+// counts how many times we've gone into auto. 
+int autoCount = 0; 
 
 void AutonomousControl(Servo mySero)
 {
+  // start of auto sequence
+  autoCount += 1; 
 
   unsigned long myTime;
 
@@ -27,13 +30,18 @@ void AutonomousControl(Servo mySero)
     {
     case START:
       Serial.println("in Autonomous mode the current state: START");
-      // Add START state instructions here
       AutoCurrentState = AUTO_ACTION1; // Transition to next state
       lastActionTime = millis();       // Record the time when the forward state started
       break;
 
     case AUTO_ACTION1:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION1");
+
+      // starts the light sequencen only on the first itteration
+      if (autoCount == 1){
+        lightTheWay();
+      }
+
       // move forward for a time, then stop, and transition to the next state
       autonomousForward(20,10);
       AutoCurrentState = AUTO_ACTION2;
@@ -41,32 +49,53 @@ void AutonomousControl(Servo mySero)
 
     case AUTO_ACTION2:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION2");
-      // Add state instructions here
-      delay(200);       
-                    // Placeholder delay
-      autonomousSpinRight(10);
+      
+      delay(200);// Placeholder delay
+
+      // going towards the grave 
+      if (autoCount % 2 == 1){
+        autonomousSpinRight(10);
+      }
+      // going away from the grave
+      else {
+        autonomousSpinLeft(10); 
+      }
+
       AutoCurrentState = AUTO_ACTION3; // Transition to next state
       break;
 
     case AUTO_ACTION3:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION3");
-      // Add state instructions here
+      
       delay(200);                     // Placeholder delay
+
       autonomousForward(20,10);
+
+      // finish light sequence after first itteration ONLY
+      if (autoCount == 1){
+        noMoreLight();
+      }
+
       AutoCurrentState = AUTO_ACTION4; // Transition to next state
       break;
 
     case AUTO_ACTION4:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION4");
-      // Add state instructions here
+      
       delay(200);                     // Placeholder delay
-      followLine(mySero);
+
+      // goes into line following on the way to the graveyard ONLY
+      // will surrender to remote controller upon exiting out of the tunnel on the way back out of the graveyard
+      if (autoCount % 2 == 1){
+        followLine(mySero);
+      }
+
       AutoCurrentState = AUTO_ACTION5; // Transition to next state
       break;
     
     case AUTO_ACTION5:
       Serial.println("in Autonomous mode the current state: AUTO_ACTION5");
-      // Add state instructions here
+      
       delay(1000);             // Placeholder delay
       AutoCurrentState = START; // Transition to next state
       break;
@@ -78,7 +107,9 @@ void AutonomousControl(Servo mySero)
 
   // The code will exit the while loop when IDLE state is reached
   Serial.println("State: IDLE");
-  // Add IDLE state instructions here
+  
+  RobotCurrentState = MANUAL;    //switch to manual 
+  AutoCurrentState = START;      //Set to start again to go into auto again
 }
 
 //function to keep track of the current count of the distance traveled by a point on the tip of the wheels
@@ -104,6 +135,7 @@ void autonomousForward(float inchesToTravel, int speed)
   int leftCount, rightCount;
 
   int target = countForDistance(inchesToTravel);
+
   /* Set the encoder pulses count back to zero */
   resetLeftEncoderCnt();
   resetRightEncoderCnt();
@@ -114,13 +146,12 @@ void autonomousForward(float inchesToTravel, int speed)
   /* "Turn on" the motor */
   enableMotor(BOTH_MOTORS);
 
-
-
   /* Drive motor until it has received x encoder pulses */
   while (totalCount < target)
   {
     leftCount = getEncoderLeftCnt();
     rightCount = getEncoderRightCnt();
+
       /* Set motor speed */
     if(leftCount<rightCount){
       setMotorSpeed(LEFT_MOTOR, speed+0.02);
@@ -146,6 +177,7 @@ void autonomousSpinLeft(int speed){
   int leftCount, rightCount;
 
   int target = countForDistance(3);
+
   /* Set the encoder pulses count back to zero */
   resetLeftEncoderCnt();
   resetRightEncoderCnt();
@@ -184,6 +216,7 @@ void autonomousSpinRight(int speed){
   /* Cause the robot to drive forward */
   setMotorDirection(LEFT_MOTOR, MOTOR_DIR_FORWARD);
   setMotorDirection(RIGHT_MOTOR,MOTOR_DIR_BACKWARD);
+
   /* "Turn on" the motor */
   enableMotor(BOTH_MOTORS);
 
@@ -198,4 +231,14 @@ void autonomousSpinRight(int speed){
     totalCount = (leftCount + rightCount) / 2;
   }
   setMotorSpeed(BOTH_MOTORS, 0);
+}
+
+// turns on the yellow LED to light the tunnel 
+void lightTheWay(){
+  digitalWrite(YELLOW_LED_PIN, HIGH);
+}
+
+// turns off the yellow LED that is lighting the tunnel 
+void noMoreLight(){
+  digitalWrite(YELLOW_LED_PIN, LOW);
 }

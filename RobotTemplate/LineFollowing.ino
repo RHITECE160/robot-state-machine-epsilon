@@ -1,14 +1,13 @@
 /*
  * Summary:
- * This example has the TI Robotic System Learning Kit (TI RSLK) follow a line
- * using a basic line following algorithm. This example works on a dark floor with
- * a white line, but may be changed by modifying the _lineColor_ value. The robot 
- * first needs to be calibrated (on floor without line). Then place the robot
+ This code implements line following behavior
+ * The robot first needs to be calibrated (on floor without line). Then place the robot
  * on the line and hit the left button again to begin the line following.
 
   written for the MSP432401 board
-  Author: Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
-  Last revised: 2/5/2024
+  Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
+  Date: Feb 11, 2024
+*/
 
   
 /* Modify the following line to use an alternate UART interface (i.e. Serial1/2/3) */
@@ -29,23 +28,25 @@ PS2X Controller;
 void floorCalibration()
 {
     /* Place Robot On Floor (no line) */
-    delay(2000);
-    //UART_SERIAL.println("Push left button on Launchpad to begin calibration.");
-    //UART_SERIAL.println("Make sure the robot is on the floor away from the line.\n");
+    delay(2000); // place holder delay 
 
     Serial.println("Push left button on Launchpad to begin calibration.");
     Serial.println("Make sure the robot is on the floor away from the line.\n");
-    /* Wait until button is pressed to start robot */
+    
     /* Wait until button is pressed to start robot */
     waitBtnPressed(START_BUTTON, RED_LED);
 
-    delay(500);
+    delay(500); // placeholder delay 
+
     //UART_SERIAL.println("Running calibration on floor");
     Serial.println("Running calibration on floor");
+
     /* Set both motors direction forward */
     setMotorDirection(BOTH_MOTORS, MOTOR_DIR_FORWARD);
+
     /* Enable both motors */
     enableMotor(BOTH_MOTORS);
+
     /* Set both motors speed 20 */
     setMotorSpeed(BOTH_MOTORS, 20);
 
@@ -54,14 +55,11 @@ void floorCalibration()
 
     /* Disable both motors */
     disableMotor(BOTH_MOTORS);
-
-    //UART_SERIAL.println("Reading floor values complete");
+    
     Serial.println("Reading floor values complete");
-
-    //UART_SERIAL.println("Push START button on Breadboard to begin line following.");
-    //UART_SERIAL.println("Make sure the robot is on the line.\n");
     Serial.println("Push START button on Breadboard to begin line following.");
     Serial.println("Make sure the robot is on the line.\n");
+
     /* Wait until button is pressed to start robot */
     waitBtnPressed(START_BUTTON, RED_LED);
     delay(1000);
@@ -69,7 +67,9 @@ void floorCalibration()
     enableMotor(BOTH_MOTORS);
 }
 
-//bool isCalibrationComplete = false;
+/*
+-> Follows the line after line following and as it reaches the end, the claw is opened as bump switch is hit
+*/
 void followLine(Servo myServo)
 {
     /* Run this setup only once */
@@ -100,23 +100,4 @@ void followLine(Servo myServo)
     }
     Openclaw(myServo);
     Serial.print("Line Following stopped");
-    RobotCurrentState = MANUAL;
-    AutoCurrentState = START;
 }
-
-// void findLine() {
-//   uint32_t linePos = getLinePosition();
-//   Serial.println(linePos);
-//   while(linePos == 0) {
-//     spinSlow();
-//   }
-//   exit;
-// }
-
-// void spinSlow() {
-//   enableMotor(BOTH_MOTORS);
-//   setMotorDirection(LEFT_MOTOR, MOTOR_DIR_BACKWARD);
-//   setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_FORWARD);
-//   setMotorSpeed(LEFT_MOTOR, 10);
-//   setMotorSpeed(RIGHT_MOTOR, 10);
-// }

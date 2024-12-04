@@ -4,10 +4,12 @@
  * The robot first needs to be calibrated (on floor without line). Then place the robot
  * on the line and hit the left button again to begin the line following.
 
+  written for the MSP432401 board
   Created by: Rohan Malipeddi, Luis Hernandez Aguirre, Brooklyn Jennings
   Date: Feb 11, 2024
 */
 
+  
 /* Modify the following line to use an alternate UART interface (i.e. Serial1/2/3) */
 #define UART_SERIAL Serial
 
@@ -92,10 +94,10 @@ void followLine(Servo myServo)
           setMotorSpeed(RIGHT_MOTOR, normalSpeed);
       }
       //ps2.read_gamepad();
-      if(getBumpSwitchPressed() > 0) {               //bump pressed
+      if(getBumpSwitchPressed() > 0) {
         follow = false;
       }
     }
-    Openclaw(myServo);                             //opens claw
+    Openclaw(myServo);
     Serial.print("Line Following stopped");
 }

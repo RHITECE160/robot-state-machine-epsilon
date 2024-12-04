@@ -97,7 +97,7 @@ void AutonomousControl(Servo mySero)
       Serial.println("in Autonomous mode the current state: AUTO_ACTION5");
       
       delay(1000);             // Placeholder delay
-      AutoCurrentState = IDLE; // Transition to next state
+      AutoCurrentState = START; // Transition to next state
       break;
 
     default:

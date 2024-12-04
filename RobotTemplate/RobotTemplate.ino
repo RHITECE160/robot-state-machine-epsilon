@@ -16,7 +16,8 @@
 
 
   written for the MSP432401 board
-  
+  Author: Jennings Brooklyn, Rohan Malipeddi, Luis Hernandez
+  Last revised: 2/5/2024
 
 ***** Hardware Connections: *****
      playstation connections
@@ -177,8 +178,10 @@ void loop() {
   button is used to change the state from MANUAL to AUTONOMOUS.
 
 -> Goes into manual state when button on breadboard is pressed
--> L3 and R3 pressed goes into autonomous
--> while in autonomous, does the line following and then to manual
+-> Joysticks pressed goes into autonomous
+-> while in autonomous, if square is pressed, it goes into line following
+-> wihle in line following, if triangle is pressed, goes into manual
+      -> also sets the AutoCurrentState to be Start
 */
 void updateStateMachine() {
   
@@ -194,8 +197,8 @@ void updateStateMachine() {
     case MANUAL:
       Serial.print("in manual state........");
       if (ps2x.Button(PSB_R3) && ps2x.Button(PSB_L3)) {
-        // go to Autonomous state when circle button pushed
-        Serial.print("Circle pressed going to auto........");
+        // go to Autonomous state when Joysticks are both pushed
+        Serial.print("Joysticks pressed going to auto........");
         RobotCurrentState = AUTONOMOUS;
       }
       break;
